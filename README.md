@@ -43,6 +43,10 @@ For a detailed video tutorial on how to use the script, [click here](https://dri
 6. Enter stock symbols (without `NSE:`) starting from cell A3.
 7. Click on `Stock Prices` > `Update Prices` to fetch and display stock data.
 
+## View and Copy
+
+If you prefer to use a pre-configured Google Sheet with the App Script already set up, you can view and make a copy of [this Google Sheet](https://docs.google.com/spreadsheets/d/1lFifrj-Tz-uy5HfSLb8w6gkfa67wKtm-XMkU9gA29qk/edit?usp=sharing). The App Script is included, so you don't need to worry about setting up the code.
+
 ## Optional: Populate Stock Symbols Automatically
 
 Instead of manually entering stock symbols, you can use the `Populate.js` script to add a predefined list of stocks.
