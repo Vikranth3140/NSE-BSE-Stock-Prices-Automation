@@ -6,8 +6,8 @@ function getStockPrices() {
   // Clear previous data
   sheet.getRange('B2:G').clearContent();
   
-  // Get stock symbols from column A
-  var tickers = sheet.getRange('A2:A').getValues();
+  // Get stock symbols from column A, starting from A3
+  var tickers = sheet.getRange('A3:A').getValues();
   
   // Loop through tickers and fetch stock data using GOOGLEFINANCE
   for (var i = 0; i < tickers.length; i++) {
@@ -21,12 +21,12 @@ function getStockPrices() {
       var lowFormula = '=GOOGLEFINANCE("' + fullTicker + '","low")';
       var openFormula = '=GOOGLEFINANCE("' + fullTicker + '","open")';
       
-      sheet.getRange(i + 2, 2).setFormula(priceFormula); // Column B for Price
-      sheet.getRange(i + 2, 3).setFormula(changeFormula); // Column C for Change
-      sheet.getRange(i + 2, 4).setFormula(volumeFormula); // Column D for Volume
-      sheet.getRange(i + 2, 5).setFormula(highFormula); // Column E for High
-      sheet.getRange(i + 2, 6).setFormula(lowFormula); // Column F for Low
-      sheet.getRange(i + 2, 7).setFormula(openFormula); // Column G for Open
+      sheet.getRange(i + 3, 2).setFormula(priceFormula); // Column B for Price
+      sheet.getRange(i + 3, 3).setFormula(changeFormula); // Column C for Change
+      sheet.getRange(i + 3, 4).setFormula(volumeFormula); // Column D for Volume
+      sheet.getRange(i + 3, 5).setFormula(highFormula); // Column E for High
+      sheet.getRange(i + 3, 6).setFormula(lowFormula); // Column F for Low
+      sheet.getRange(i + 3, 7).setFormula(openFormula); // Column G for Open
     }
   }
   
@@ -34,19 +34,19 @@ function getStockPrices() {
   SpreadsheetApp.flush();
   
   // Optional: Convert formulas to values if you do not want to keep the GOOGLEFINANCE formula
-  var prices = sheet.getRange('B2:B').getValues();
-  var changes = sheet.getRange('C2:C').getValues();
-  var volumes = sheet.getRange('D2:D').getValues();
-  var highs = sheet.getRange('E2:E').getValues();
-  var lows = sheet.getRange('F2:F').getValues();
-  var opens = sheet.getRange('G2:G').getValues();
+  var prices = sheet.getRange('B3:B').getValues();
+  var changes = sheet.getRange('C3:C').getValues();
+  var volumes = sheet.getRange('D3:D').getValues();
+  var highs = sheet.getRange('E3:E').getValues();
+  var lows = sheet.getRange('F3:F').getValues();
+  var opens = sheet.getRange('G3:G').getValues();
   
-  sheet.getRange('B2:B').setValues(prices);
-  sheet.getRange('C2:C').setValues(changes);
-  sheet.getRange('D2:D').setValues(volumes);
-  sheet.getRange('E2:E').setValues(highs);
-  sheet.getRange('F2:F').setValues(lows);
-  sheet.getRange('G2:G').setValues(opens);
+  sheet.getRange('B3:B').setValues(prices);
+  sheet.getRange('C3:C').setValues(changes);
+  sheet.getRange('D3:D').setValues(volumes);
+  sheet.getRange('E3:E').setValues(highs);
+  sheet.getRange('F3:F').setValues(lows);
+  sheet.getRange('G3:G').setValues(opens);
 }
 
 function onOpen() {
