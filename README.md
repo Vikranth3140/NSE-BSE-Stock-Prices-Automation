@@ -15,18 +15,11 @@ This Google Sheets script fetches real-time stock prices, changes, volume, high,
 3. In the Apps Script editor, delete any existing code and replace it with the code from the `Code.js` file in this repository. *(Note: This file is named `Code.js` because GitHub does not support the `.gs` file extension used by Google Apps Script. However, you can copy the contents directly into your Apps Script project.)*
     - Copy the entire content of the `Code.js` file.
     - Paste the copied content into the Apps Script editor.
+    - **Note**: If there are any specific lines you do not want to include, you can comment them out by adding `//` at the beginning of the line.
 4. Save the script by clicking the disk icon or pressing `Ctrl + S`.
 5. Close the Apps Script editor and refresh your Google Sheets document.
-6. Enter stock symbols (without `NSE:`) in column A starting from cell A2.
+6. Enter stock symbols (without `NSE:`) starting from cell A3.
 7. Click on `Stock Prices` > `Update Prices` to fetch and display stock data.
-
-## Example
-
-| A        | B      | C       | D      | E     | F    | G    |
-|----------|--------|---------|--------|-------|------|------|
-| SYMBOL   | Price  | Change  | Volume | High  | Low  | Open |
-| RELIANCE |        |         |        |       |      |      |
-| SHAREINDIA|       |         |        |       |      |      |
 
 ## License
 
