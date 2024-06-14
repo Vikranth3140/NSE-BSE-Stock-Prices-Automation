@@ -1,12 +1,34 @@
 # NSE Stock Prices Automation
 
-This Google Sheets script fetches real-time stock prices, changes, volume, high, low, and open prices for NSE stocks using the `GOOGLEFINANCE` function. Simply enter the stock symbols without the `NSE:` prefix, and the script will handle the rest.
+This Google Sheets script fetches real-time stock prices, changes percentage, volume, high, low, open prices, market capitalization, average daily trading volume, P/E ratio, earnings per share, 52-week high, 52-week low, previous day's closing prices, number of outstanding shares, trade time, and data delay for NSE stocks using the `GOOGLEFINANCE` function. Simply enter the stock symbols without the `NSE:` prefix, and the script will handle the rest.
+
+![Working Example](assets/image.png)
 
 ## Features
 
 - Fetches real-time stock prices for NSE listed stocks.
-- Retrieves additional stock data such as percentage change, volume, high, low, and open prices.
+- Retrieves additional stock data such as:
+  - Price
+  - Percentage Change
+  - Volume
+  - High
+  - Low
+  - Open
+  - Market Capitalization
+  - Average Daily Trading Volume
+  - P/E Ratio
+  - Earnings Per Share
+  - 52-Week High
+  - 52-Week Low
+  - Previous Day's Closing Price
+  - Number of Outstanding Shares
+  - Trade Time
+  - Data Delay
 - Automatically appends `NSE:` to stock symbols.
+
+## Video Tutorial
+
+For a detailed video tutorial on how to use the script, [click here](https://drive.google.com/file/d/1IUSCFHQpC6hRwfGvGHgsxXfry0T5IXRh/view?usp=sharing).
 
 ## Setup
 
@@ -20,6 +42,10 @@ This Google Sheets script fetches real-time stock prices, changes, volume, high,
 5. Close the Apps Script editor and refresh your Google Sheets document.
 6. Enter stock symbols (without `NSE:`) starting from cell A3.
 7. Click on `Stock Prices` > `Update Prices` to fetch and display stock data.
+
+## View and Copy
+
+If you prefer to use a pre-configured Google Sheet with the App Script already set up, you can view and make a copy of [this Google Sheet](https://docs.google.com/spreadsheets/d/1lFifrj-Tz-uy5HfSLb8w6gkfa67wKtm-XMkU9gA29qk/edit?usp=sharing). The App Script is included, so you don't need to worry about setting up the code.
 
 ## Optional: Populate Stock Symbols Automatically
 

@@ -21,8 +21,6 @@ function getStockPrices() {
       var lowFormula = '=GOOGLEFINANCE("' + fullTicker + '","low")';
       var openFormula = '=GOOGLEFINANCE("' + fullTicker + '","priceopen")';
       var marketCapFormula = '=GOOGLEFINANCE("' + fullTicker + '","marketcap")';
-      var tradeTimeFormula = '=GOOGLEFINANCE("' + fullTicker + '","tradetime")';
-      var dataDelayFormula = '=GOOGLEFINANCE("' + fullTicker + '","datadelay")';
       var volumeAvgFormula = '=GOOGLEFINANCE("' + fullTicker + '","volumeavg")';
       var peFormula = '=GOOGLEFINANCE("' + fullTicker + '","pe")';
       var epsFormula = '=GOOGLEFINANCE("' + fullTicker + '","eps")';
@@ -30,6 +28,8 @@ function getStockPrices() {
       var low52Formula = '=GOOGLEFINANCE("' + fullTicker + '","low52")';
       var closeYestFormula = '=GOOGLEFINANCE("' + fullTicker + '","closeyest")';
       var sharesFormula = '=GOOGLEFINANCE("' + fullTicker + '","shares")';
+      var tradeTimeFormula = '=GOOGLEFINANCE("' + fullTicker + '","tradetime")';
+      var dataDelayFormula = '=GOOGLEFINANCE("' + fullTicker + '","datadelay")';
       
       sheet.getRange(i + 3, 2).setFormula(priceFormula); // Column B for Price
       sheet.getRange(i + 3, 3).setFormula(changePctFormula); // Column C for Change Percentage
@@ -38,15 +38,15 @@ function getStockPrices() {
       sheet.getRange(i + 3, 6).setFormula(lowFormula); // Column F for Low
       sheet.getRange(i + 3, 7).setFormula(openFormula); // Column G for Open
       sheet.getRange(i + 3, 8).setFormula(marketCapFormula); // Column H for Market Cap
-      sheet.getRange(i + 3, 9).setFormula(tradeTimeFormula); // Column I for Trade Time
-      sheet.getRange(i + 3, 10).setFormula(dataDelayFormula); // Column J for Data Delay
-      sheet.getRange(i + 3, 11).setFormula(volumeAvgFormula); // Column K for Volume Avg
-      sheet.getRange(i + 3, 12).setFormula(peFormula); // Column L for PE Ratio
-      sheet.getRange(i + 3, 13).setFormula(epsFormula); // Column M for EPS
-      sheet.getRange(i + 3, 14).setFormula(high52Formula); // Column N for 52-Week High
-      sheet.getRange(i + 3, 15).setFormula(low52Formula); // Column O for 52-Week Low
-      sheet.getRange(i + 3, 16).setFormula(closeYestFormula); // Column P for Close (Previous Day)
-      sheet.getRange(i + 3, 17).setFormula(sharesFormula); // Column Q for Shares
+      sheet.getRange(i + 3, 9).setFormula(volumeAvgFormula); // Column I for Volume Avg
+      sheet.getRange(i + 3, 10).setFormula(peFormula); // Column J for PE Ratio
+      sheet.getRange(i + 3, 11).setFormula(epsFormula); // Column K for EPS
+      sheet.getRange(i + 3, 12).setFormula(high52Formula); // Column L for 52-Week High
+      sheet.getRange(i + 3, 13).setFormula(low52Formula); // Column M for 52-Week Low
+      sheet.getRange(i + 3, 14).setFormula(closeYestFormula); // Column N for Close (Previous Day)
+      sheet.getRange(i + 3, 15).setFormula(sharesFormula); // Column O for Shares
+      sheet.getRange(i + 3, 16).setFormula(tradeTimeFormula); // Column P for Trade Time
+      sheet.getRange(i + 3, 17).setFormula(dataDelayFormula); // Column Q for Data Delay
     }
   }
   
@@ -61,15 +61,15 @@ function getStockPrices() {
   var lows = sheet.getRange('F3:F').getValues();
   var opens = sheet.getRange('G3:G').getValues();
   var marketCaps = sheet.getRange('H3:H').getValues();
-  var tradeTimes = sheet.getRange('I3:I').getValues();
-  var dataDelays = sheet.getRange('J3:J').getValues();
-  var volumeAvgs = sheet.getRange('K3:K').getValues();
-  var peRatios = sheet.getRange('L3:L').getValues();
-  var eps = sheet.getRange('M3:M').getValues();
-  var high52s = sheet.getRange('N3:N').getValues();
-  var low52s = sheet.getRange('O3:O').getValues();
-  var closeYests = sheet.getRange('P3:P').getValues();
-  var shares = sheet.getRange('Q3:Q').getValues();
+  var volumeAvgs = sheet.getRange('I3:I').getValues();
+  var peRatios = sheet.getRange('J3:J').getValues();
+  var eps = sheet.getRange('K3:K').getValues();
+  var high52s = sheet.getRange('L3:L').getValues();
+  var low52s = sheet.getRange('M3:M').getValues();
+  var closeYests = sheet.getRange('N3:N').getValues();
+  var shares = sheet.getRange('O3:O').getValues();
+  var tradeTimes = sheet.getRange('P3:P').getValues();
+  var dataDelays = sheet.getRange('Q3:Q').getValues();
   
   sheet.getRange('B3:B').setValues(prices);
   sheet.getRange('C3:C').setValues(changesPct);
@@ -78,15 +78,15 @@ function getStockPrices() {
   sheet.getRange('F3:F').setValues(lows);
   sheet.getRange('G3:G').setValues(opens);
   sheet.getRange('H3:H').setValues(marketCaps);
-  sheet.getRange('I3:I').setValues(tradeTimes);
-  sheet.getRange('J3:J').setValues(dataDelays);
-  sheet.getRange('K3:K').setValues(volumeAvgs);
-  sheet.getRange('L3:L').setValues(peRatios);
-  sheet.getRange('M3:M').setValues(eps);
-  sheet.getRange('N3:N').setValues(high52s);
-  sheet.getRange('O3:O').setValues(low52s);
-  sheet.getRange('P3:P').setValues(closeYests);
-  sheet.getRange('Q3:Q').setValues(shares);
+  sheet.getRange('I3:I').setValues(volumeAvgs);
+  sheet.getRange('J3:J').setValues(peRatios);
+  sheet.getRange('K3:K').setValues(eps);
+  sheet.getRange('L3:L').setValues(high52s);
+  sheet.getRange('M3:M').setValues(low52s);
+  sheet.getRange('N3:N').setValues(closeYests);
+  sheet.getRange('O3:O').setValues(shares);
+  sheet.getRange('P3:P').setValues(tradeTimes);
+  sheet.getRange('Q3:Q').setValues(dataDelays);
 }
 
 function onOpen() {
