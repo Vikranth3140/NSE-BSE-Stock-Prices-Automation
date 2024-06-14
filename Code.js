@@ -1,4 +1,4 @@
-// This is Code.gs but GitHub doesn't support .gs, so have used .js (JavaScript file format)
+// This is Code.gs but GitHub doesn't support .gs, so have used .js (JavaScript file format).
 
 function getStockPrices() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
