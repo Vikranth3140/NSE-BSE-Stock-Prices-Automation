@@ -1,3 +1,7 @@
+// This is Code.gs but GitHub doesn't support .gs, so we have used .js (JavaScript file format).
+// Please note that the below stocks have been randomly picked for the population of the NSE stocks
+// and we do not represent or endorse any specific stock or company here.
+
 function populateStocks() {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     var stocks = [
