@@ -4,7 +4,7 @@ function getStockPrices() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   
   // Clear previous data
-  sheet.getRange('B2:P').clearContent();
+  sheet.getRange('B2:Q').clearContent();
   
   // Get stock symbols from column A, starting from A3
   var tickers = sheet.getRange('A3:A').getValues();
@@ -15,7 +15,7 @@ function getStockPrices() {
     if (ticker) {
       var fullTicker = 'NSE:' + ticker;
       var priceFormula = '=GOOGLEFINANCE("' + fullTicker + '","price")';
-      var changeFormula = '=GOOGLEFINANCE("' + fullTicker + '","changepct")';
+      var changePctFormula = '=GOOGLEFINANCE("' + fullTicker + '","changepct")';
       var volumeFormula = '=GOOGLEFINANCE("' + fullTicker + '","volume")';
       var highFormula = '=GOOGLEFINANCE("' + fullTicker + '","high")';
       var lowFormula = '=GOOGLEFINANCE("' + fullTicker + '","low")';
@@ -28,14 +28,11 @@ function getStockPrices() {
       var epsFormula = '=GOOGLEFINANCE("' + fullTicker + '","eps")';
       var high52Formula = '=GOOGLEFINANCE("' + fullTicker + '","high52")';
       var low52Formula = '=GOOGLEFINANCE("' + fullTicker + '","low52")';
-      var changeFormula = '=GOOGLEFINANCE("' + fullTicker + '","change")';
-      var betaFormula = '=GOOGLEFINANCE("' + fullTicker + '","beta")';
       var closeYestFormula = '=GOOGLEFINANCE("' + fullTicker + '","closeyest")';
       var sharesFormula = '=GOOGLEFINANCE("' + fullTicker + '","shares")';
-      var currencyFormula = '=GOOGLEFINANCE("' + fullTicker + '","currency")';
       
       sheet.getRange(i + 3, 2).setFormula(priceFormula); // Column B for Price
-      sheet.getRange(i + 3, 3).setFormula(changeFormula); // Column C for Change
+      sheet.getRange(i + 3, 3).setFormula(changePctFormula); // Column C for Change Percentage
       sheet.getRange(i + 3, 4).setFormula(volumeFormula); // Column D for Volume
       sheet.getRange(i + 3, 5).setFormula(highFormula); // Column E for High
       sheet.getRange(i + 3, 6).setFormula(lowFormula); // Column F for Low
@@ -48,11 +45,8 @@ function getStockPrices() {
       sheet.getRange(i + 3, 13).setFormula(epsFormula); // Column M for EPS
       sheet.getRange(i + 3, 14).setFormula(high52Formula); // Column N for 52-Week High
       sheet.getRange(i + 3, 15).setFormula(low52Formula); // Column O for 52-Week Low
-      sheet.getRange(i + 3, 16).setFormula(changeFormula); // Column P for Change (Price since previous day)
-      sheet.getRange(i + 3, 17).setFormula(betaFormula); // Column Q for Beta
-      sheet.getRange(i + 3, 18).setFormula(closeYestFormula); // Column R for Close (Previous Day)
-      sheet.getRange(i + 3, 19).setFormula(sharesFormula); // Column S for Shares
-      sheet.getRange(i + 3, 20).setFormula(currencyFormula); // Column T for Currency
+      sheet.getRange(i + 3, 16).setFormula(closeYestFormula); // Column P for Close (Previous Day)
+      sheet.getRange(i + 3, 17).setFormula(sharesFormula); // Column Q for Shares
     }
   }
   
@@ -61,7 +55,7 @@ function getStockPrices() {
   
   // Optional: Convert formulas to values if you do not want to keep the GOOGLEFINANCE formula
   var prices = sheet.getRange('B3:B').getValues();
-  var changes = sheet.getRange('C3:C').getValues();
+  var changesPct = sheet.getRange('C3:C').getValues();
   var volumes = sheet.getRange('D3:D').getValues();
   var highs = sheet.getRange('E3:E').getValues();
   var lows = sheet.getRange('F3:F').getValues();
@@ -74,14 +68,11 @@ function getStockPrices() {
   var eps = sheet.getRange('M3:M').getValues();
   var high52s = sheet.getRange('N3:N').getValues();
   var low52s = sheet.getRange('O3:O').getValues();
-  var changes = sheet.getRange('P3:P').getValues();
-  var betas = sheet.getRange('Q3:Q').getValues();
-  var closeYests = sheet.getRange('R3:R').getValues();
-  var shares = sheet.getRange('S3:S').getValues();
-  var currencies = sheet.getRange('T3:T').getValues();
+  var closeYests = sheet.getRange('P3:P').getValues();
+  var shares = sheet.getRange('Q3:Q').getValues();
   
   sheet.getRange('B3:B').setValues(prices);
-  sheet.getRange('C3:C').setValues(changes);
+  sheet.getRange('C3:C').setValues(changesPct);
   sheet.getRange('D3:D').setValues(volumes);
   sheet.getRange('E3:E').setValues(highs);
   sheet.getRange('F3:F').setValues(lows);
@@ -94,11 +85,8 @@ function getStockPrices() {
   sheet.getRange('M3:M').setValues(eps);
   sheet.getRange('N3:N').setValues(high52s);
   sheet.getRange('O3:O').setValues(low52s);
-  sheet.getRange('P3:P').setValues(changes);
-  sheet.getRange('Q3:Q').setValues(betas);
-  sheet.getRange('R3:R').setValues(closeYests);
-  sheet.getRange('S3:S').setValues(shares);
-  sheet.getRange('T3:T').setValues(currencies);
+  sheet.getRange('P3:P').setValues(closeYests);
+  sheet.getRange('Q3:Q').setValues(shares);
 }
 
 function onOpen() {
