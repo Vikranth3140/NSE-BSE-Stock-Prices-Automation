@@ -2,17 +2,22 @@ function getStockPrices() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   
   // Clear previous data
-  sheet.getRange('B2:B').clearContent();
+  sheet.getRange('B2:E').clearContent();
   
   // Get stock symbols from column A
-  var tickers = sheet.getRange('A1:A').getValues();
+  var tickers = sheet.getRange('A2:A').getValues();
   
-  // Loop through tickers and fetch stock prices using GOOGLEFINANCE
+  // Loop through tickers and fetch stock data using GOOGLEFINANCE
   for (var i = 0; i < tickers.length; i++) {
     var ticker = tickers[i][0];
     if (ticker) {
-      var formula = '=GOOGLEFINANCE("' + ticker + '","price")';
-      sheet.getRange(i + 1, 2).setFormula(formula);
+      var priceFormula = '=GOOGLEFINANCE("' + ticker + '","price")';
+      var changeFormula = '=GOOGLEFINANCE("' + ticker + '","changepct")';
+      var volumeFormula = '=GOOGLEFINANCE("' + ticker + '","volume")';
+      
+      sheet.getRange(i + 2, 2).setFormula(priceFormula); // Column B for Price
+      sheet.getRange(i + 2, 3).setFormula(changeFormula); // Column C for Change
+      sheet.getRange(i + 2, 4).setFormula(volumeFormula); // Column D for Volume
     }
   }
   
@@ -20,8 +25,13 @@ function getStockPrices() {
   SpreadsheetApp.flush();
   
   // Optional: Convert formulas to values if you do not want to keep the GOOGLEFINANCE formula
-  var prices = sheet.getRange('B1:B').getValues();
-  sheet.getRange('B1:B').setValues(prices);
+  var prices = sheet.getRange('B2:B').getValues();
+  var changes = sheet.getRange('C2:C').getValues();
+  var volumes = sheet.getRange('D2:D').getValues();
+  
+  sheet.getRange('B2:B').setValues(prices);
+  sheet.getRange('C2:C').setValues(changes);
+  sheet.getRange('D2:D').setValues(volumes);
 }
 
 function onOpen() {
