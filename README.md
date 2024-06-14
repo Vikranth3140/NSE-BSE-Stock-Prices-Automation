@@ -2,6 +2,8 @@
 
 This Google Sheets script fetches real-time stock prices, changes percentage, volume, high, low, open prices, market capitalization, average daily trading volume, P/E ratio, earnings per share, 52-week high, 52-week low, previous day's closing prices, number of outstanding shares, trade time, and data delay for NSE stocks using the `GOOGLEFINANCE` function. Simply enter the stock symbols without the `NSE:` prefix, and the script will handle the rest.
 
+Read our Dev Blog [here](https://dev.to/vikranth3140/automate-nse-stock-prices-in-google-sheets-with-ease-3mop)
+
 ![Working Example](assets/image.png)
 
 ## Features
