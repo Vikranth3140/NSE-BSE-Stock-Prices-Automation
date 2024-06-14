@@ -11,12 +11,13 @@ function getStockPrices() {
   for (var i = 0; i < tickers.length; i++) {
     var ticker = tickers[i][0];
     if (ticker) {
-      var priceFormula = '=GOOGLEFINANCE("' + ticker + '","price")';
-      var changeFormula = '=GOOGLEFINANCE("' + ticker + '","changepct")';
-      var volumeFormula = '=GOOGLEFINANCE("' + ticker + '","volume")';
-      var highFormula = '=GOOGLEFINANCE("' + ticker + '","high")';
-      var lowFormula = '=GOOGLEFINANCE("' + ticker + '","low")';
-      var openFormula = '=GOOGLEFINANCE("' + ticker + '","open")';
+      var fullTicker = 'NSE:' + ticker;
+      var priceFormula = '=GOOGLEFINANCE("' + fullTicker + '","price")';
+      var changeFormula = '=GOOGLEFINANCE("' + fullTicker + '","changepct")';
+      var volumeFormula = '=GOOGLEFINANCE("' + fullTicker + '","volume")';
+      var highFormula = '=GOOGLEFINANCE("' + fullTicker + '","high")';
+      var lowFormula = '=GOOGLEFINANCE("' + fullTicker + '","low")';
+      var openFormula = '=GOOGLEFINANCE("' + fullTicker + '","open")';
       
       sheet.getRange(i + 2, 2).setFormula(priceFormula); // Column B for Price
       sheet.getRange(i + 2, 3).setFormula(changeFormula); // Column C for Change
