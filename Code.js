@@ -81,6 +81,8 @@ function fetchHistoricalDataAndCreateCharts() {
           .setOption('title', ticker + ' - Last 3 Months Performance')
           .setOption('hAxis.title', 'Date')
           .setOption('vAxis.title', 'Price')
+          .setOption('width', 100) // Adjust chart width to fit in one cell
+          .setOption('height', 100) // Adjust chart height to fit in one cell
           .build();
       
       // Insert the chart into the sheet
