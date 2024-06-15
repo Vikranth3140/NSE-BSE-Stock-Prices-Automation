@@ -4,7 +4,7 @@ function getStockPrices() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   
   // Clear previous data
-  sheet.getRange('B2:Q').clearContent();
+  clearStockParameters();
   
   // Get stock symbols from column A, starting from A3
   var tickers = sheet.getRange('A3:A').getValues();
@@ -81,8 +81,8 @@ function fetchHistoricalDataAndCreateCharts() {
           .setOption('title', ticker + ' - Last 3 Months Performance')
           .setOption('hAxis.title', 'Date')
           .setOption('vAxis.title', 'Price')
-          .setOption('width', 100) // Adjust chart width to fit in one cell
-          .setOption('height', 100) // Adjust chart height to fit in one cell
+          .setOption('width', 150) // Adjust chart width to fit in one cell
+          .setOption('height', 150) // Adjust chart height to fit in one cell
           .build();
       
       // Insert the chart into the sheet
@@ -103,10 +103,16 @@ function clearAllGraphs() {
   }
 }
 
+function clearStockParameters() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.getRange('B2:Q').clearContent();
+}
+
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
   ui.createMenu('Stock Prices')
       .addItem('Update Prices', 'getStockPrices')
       .addItem('Clear All Graphs', 'clearAllGraphs')
+      .addItem('Clear Stock Parameters', 'clearStockParameters')
       .addToUi();
 }
