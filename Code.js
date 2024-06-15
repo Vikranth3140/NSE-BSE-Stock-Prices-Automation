@@ -69,21 +69,33 @@ function fetchHistoricalDataAndCreateCharts() {
     if (ticker) {
       var fullTicker = 'NSE:' + ticker;
       var historicalDataFormula = '=GOOGLEFINANCE("' + fullTicker + '", "close", DATE(' + threeMonthsAgo.getFullYear() + ',' + (threeMonthsAgo.getMonth() + 1) + ',' + threeMonthsAgo.getDate() + '), TODAY(), "DAILY")';
-      var historicalDataRange = 'S' + (i * 100 + 3) + ':T' + (i * 100 + 100);
       
-      // Set the formula to fetch historical data
-      sheet.getRange(historicalDataRange.split(':')[0]).setFormula(historicalDataFormula);
+      // Set the formula to fetch historical data in a hidden sheet
+      var hiddenSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('HiddenData');
+      if (!hiddenSheet) {
+        hiddenSheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet('HiddenData');
+        hiddenSheet.hideSheet();
+      }
+      hiddenSheet.clear();
+      hiddenSheet.getRange('A1').setFormula(historicalDataFormula);
+      
+      // Wait for the data to be fetched
+      SpreadsheetApp.flush();
+      
+      // Get the fetched data
+      var dataRange = hiddenSheet.getDataRange();
+      var data = dataRange.getValues();
       
       // Create a new chart
       var chart = sheet.newChart()
           .setChartType(Charts.ChartType.LINE)
-          .addRange(sheet.getRange(historicalDataRange))
-          .setPosition(i + 3, 18, 0, 0) // Adjust the chart position
+          .addRange(hiddenSheet.getRange('A2:B' + data.length))
+          .setPosition(i + 2, 18, 0, 0) // Adjust the chart position
           .setOption('title', ticker + ' - Last 3 Months Performance')
           .setOption('hAxis.title', 'Date')
           .setOption('vAxis.title', 'Price')
-          .setOption('width', 150) // Adjust chart width to fit in one cell
-          .setOption('height', 150) // Adjust chart height to fit in one cell
+          .setOption('width', 100) // Adjust chart width to fit in one cell
+          .setOption('height', 100) // Adjust chart height to fit in one cell
           .build();
       
       // Insert the chart into the sheet
