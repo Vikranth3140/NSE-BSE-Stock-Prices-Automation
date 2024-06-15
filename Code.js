@@ -91,9 +91,22 @@ function fetchHistoricalDataAndCreateCharts() {
   }
 }
 
+function clearAllGraphs() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  
+  // Get all charts in the sheet
+  var charts = sheet.getCharts();
+  
+  // Remove each chart
+  for (var i = 0; i < charts.length; i++) {
+    sheet.removeChart(charts[i]);
+  }
+}
+
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
   ui.createMenu('Stock Prices')
       .addItem('Update Prices', 'getStockPrices')
+      .addItem('Clear All Graphs', 'clearAllGraphs')
       .addToUi();
 }
