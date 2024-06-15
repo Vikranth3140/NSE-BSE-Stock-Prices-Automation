@@ -89,9 +89,15 @@ function getStockPrices() {
   sheet.getRange('Q3:Q').setValues(dataDelays);
 }
 
+function clearStockParameters() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.getRange('B2:Q').clearContent();
+}
+
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
   ui.createMenu('Stock Prices')
       .addItem('Update Prices', 'getStockPrices')
+      .addItem('Clear Stock Details', 'clearStockParameters')
       .addToUi();
 }
