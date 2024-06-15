@@ -44,6 +44,7 @@ For a detailed video tutorial on how to use the script, [click here](https://dri
 5. Close the Apps Script editor and refresh your Google Sheets document.
 6. Enter stock symbols (without `NSE:`) starting from cell A3.
 7. Click on `Stock Prices` > `Update Prices` to fetch and display stock data.
+8. click on `Stock Prices` > `Clear Stock Details` to clear all the stock details.
 
 ## View and Copy
 
