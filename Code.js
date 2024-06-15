@@ -87,6 +87,35 @@ function getStockPrices() {
   sheet.getRange('O3:O').setValues(shares);
   sheet.getRange('P3:P').setValues(tradeTimes);
   sheet.getRange('Q3:Q').setValues(dataDelays);
+  
+  // Add a chart
+  addStockChart();
+}
+
+function addStockChart() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  
+  // Remove any existing charts
+  var charts = sheet.getCharts();
+  for (var i in charts) {
+    sheet.removeChart(charts[i]);
+  }
+  
+  // Define the range for the chart
+  var range = sheet.getRange('A2:B' + (sheet.getLastRow()));
+  
+  // Create a new chart
+  var chart = sheet.newChart()
+      .setChartType(Charts.ChartType.LINE)
+      .addRange(range)
+      .setPosition(5, 9, 0, 0)
+      .setOption('title', 'Stock Prices')
+      .setOption('hAxis.title', 'Stock Symbol')
+      .setOption('vAxis.title', 'Price')
+      .build();
+  
+  // Insert the chart into the sheet
+  sheet.insertChart(chart);
 }
 
 function onOpen() {
