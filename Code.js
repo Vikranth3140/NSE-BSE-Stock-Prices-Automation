@@ -77,7 +77,7 @@ function fetchHistoricalDataAndCreateCharts() {
       var chart = sheet.newChart()
           .setChartType(Charts.ChartType.LINE)
           .addRange(sheet.getRange(historicalDataRange))
-          .setPosition(i * 20 + 5, 10, 0, 0)
+          .setPosition(i + 2, 18, 0, 0) // Adjust the chart position
           .setOption('title', ticker + ' - Last 3 Months Performance')
           .setOption('hAxis.title', 'Date')
           .setOption('vAxis.title', 'Price')
