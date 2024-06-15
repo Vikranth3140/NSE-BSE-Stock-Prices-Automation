@@ -64,19 +64,21 @@ function fetchHistoricalDataAndCreateCharts() {
   var today = new Date();
   var threeMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 3, today.getDate());
   
+  // Create or get the hidden sheet for historical data
+  var hiddenSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('HiddenData');
+  if (!hiddenSheet) {
+    hiddenSheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet('HiddenData');
+    hiddenSheet.hideSheet();
+  }
+  hiddenSheet.clear();
+  
   for (var i = 0; i < tickers.length; i++) {
     var ticker = tickers[i][0];
     if (ticker) {
       var fullTicker = 'NSE:' + ticker;
       var historicalDataFormula = '=GOOGLEFINANCE("' + fullTicker + '", "close", DATE(' + threeMonthsAgo.getFullYear() + ',' + (threeMonthsAgo.getMonth() + 1) + ',' + threeMonthsAgo.getDate() + '), TODAY(), "DAILY")';
       
-      // Set the formula to fetch historical data in a hidden sheet
-      var hiddenSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('HiddenData');
-      if (!hiddenSheet) {
-        hiddenSheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet('HiddenData');
-        hiddenSheet.hideSheet();
-      }
-      hiddenSheet.clear();
+      // Set the formula to fetch historical data in the hidden sheet
       hiddenSheet.getRange('A1').setFormula(historicalDataFormula);
       
       // Wait for the data to be fetched
@@ -90,7 +92,7 @@ function fetchHistoricalDataAndCreateCharts() {
       var chart = sheet.newChart()
           .setChartType(Charts.ChartType.LINE)
           .addRange(hiddenSheet.getRange('A2:B' + data.length))
-          .setPosition(i + 2, 18, 0, 0) // Adjust the chart position
+          .setPosition(i + 3, 18, 0, 0) // Adjust the chart position
           .setOption('title', ticker + ' - Last 3 Months Performance')
           .setOption('hAxis.title', 'Date')
           .setOption('vAxis.title', 'Price')
