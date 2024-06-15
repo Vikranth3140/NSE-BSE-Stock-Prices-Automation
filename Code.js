@@ -50,43 +50,72 @@ function getStockPrices() {
     }
   }
   
-  // Fetch historical data and create charts
-  fetchHistoricalDataAndCreateCharts();
-  
   // Wait for formulas to calculate
   SpreadsheetApp.flush();
+  
+  // Optional: Convert formulas to values if you do not want to keep the GOOGLEFINANCE formula
+  var prices = sheet.getRange('B3:B').getValues();
+  var changesPct = sheet.getRange('C3:C').getValues();
+  var volumes = sheet.getRange('D3:D').getValues();
+  var highs = sheet.getRange('E3:E').getValues();
+  var lows = sheet.getRange('F3:F').getValues();
+  var opens = sheet.getRange('G3:G').getValues();
+  var marketCaps = sheet.getRange('H3:H').getValues();
+  var volumeAvgs = sheet.getRange('I3:I').getValues();
+  var peRatios = sheet.getRange('J3:J').getValues();
+  var eps = sheet.getRange('K3:K').getValues();
+  var high52s = sheet.getRange('L3:L').getValues();
+  var low52s = sheet.getRange('M3:M').getValues();
+  var closeYests = sheet.getRange('N3:N').getValues();
+  var shares = sheet.getRange('O3:O').getValues();
+  var tradeTimes = sheet.getRange('P3:P').getValues();
+  var dataDelays = sheet.getRange('Q3:Q').getValues();
+  
+  sheet.getRange('B3:B').setValues(prices);
+  sheet.getRange('C3:C').setValues(changesPct);
+  sheet.getRange('D3:D').setValues(volumes);
+  sheet.getRange('E3:E').setValues(highs);
+  sheet.getRange('F3:F').setValues(lows);
+  sheet.getRange('G3:G').setValues(opens);
+  sheet.getRange('H3:H').setValues(marketCaps);
+  sheet.getRange('I3:I').setValues(volumeAvgs);
+  sheet.getRange('J3:J').setValues(peRatios);
+  sheet.getRange('K3:K').setValues(eps);
+  sheet.getRange('L3:L').setValues(high52s);
+  sheet.getRange('M3:M').setValues(low52s);
+  sheet.getRange('N3:N').setValues(closeYests);
+  sheet.getRange('O3:O').setValues(shares);
+  sheet.getRange('P3:P').setValues(tradeTimes);
+  sheet.getRange('Q3:Q').setValues(dataDelays);
+  
+  // Add a chart
+  addStockChart();
 }
 
-function fetchHistoricalDataAndCreateCharts() {
+function addStockChart() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var tickers = sheet.getRange('A3:A').getValues();
-  var today = new Date();
-  var threeMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 3, today.getDate());
   
-  for (var i = 0; i < tickers.length; i++) {
-    var ticker = tickers[i][0];
-    if (ticker) {
-      var fullTicker = 'NSE:' + ticker;
-      var historicalDataFormula = '=GOOGLEFINANCE("' + fullTicker + '", "close", DATE(' + threeMonthsAgo.getFullYear() + ',' + (threeMonthsAgo.getMonth() + 1) + ',' + threeMonthsAgo.getDate() + '), TODAY(), "DAILY")';
-      var historicalDataRange = 'S' + (i * 100 + 3) + ':T' + (i * 100 + 100);
-      
-      // Set the formula to fetch historical data
-      sheet.getRange(historicalDataRange.split(':')[0]).setFormula(historicalDataFormula);
-      
-      // Create a new chart
-      var chart = sheet.newChart()
-          .setChartType(Charts.ChartType.LINE)
-          .addRange(sheet.getRange(historicalDataRange))
-          .setPosition(i + 2, 18, 0, 0) // Adjust the chart position
-          .setOption('title', ticker + ' - Last 3 Months Performance')
-          .setOption('hAxis.title', 'Date')
-          .setOption('vAxis.title', 'Price')
-          .build();
-      
-      // Insert the chart into the sheet
-      sheet.insertChart(chart);
-    }
+  // Remove any existing charts
+  var charts = sheet.getCharts();
+  for (var i in charts) {
+    sheet.removeChart(charts[i]);
   }
+  
+  // Define the range for the chart
+  var range = sheet.getRange('A2:B' + (sheet.getLastRow()));
+  
+  // Create a new chart
+  var chart = sheet.newChart()
+      .setChartType(Charts.ChartType.LINE)
+      .addRange(range)
+      .setPosition(5, 9, 0, 0)
+      .setOption('title', 'Stock Prices')
+      .setOption('hAxis.title', 'Stock Symbol')
+      .setOption('vAxis.title', 'Price')
+      .build();
+  
+  // Insert the chart into the sheet
+  sheet.insertChart(chart);
 }
 
 function onOpen() {
