@@ -4,7 +4,7 @@ function getStockPrices() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   
   // Clear previous data
-  sheet.getRange('B2:Q').clearContent();
+  clearStockParameters();
   
   // Get stock symbols from column A, starting from A3
   var tickers = sheet.getRange('A3:A').getValues();
