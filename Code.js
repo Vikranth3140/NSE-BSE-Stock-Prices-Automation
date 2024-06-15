@@ -5,6 +5,7 @@ function getStockPrices() {
   
   // Clear previous data
   clearStockParameters();
+  clearAllGraphs();
   
   // Get stock symbols from column A, starting from A3
   var tickers = sheet.getRange('A3:A').getValues();
@@ -77,7 +78,7 @@ function fetchHistoricalDataAndCreateCharts() {
       var chart = sheet.newChart()
           .setChartType(Charts.ChartType.LINE)
           .addRange(sheet.getRange(historicalDataRange))
-          .setPosition(i + 2, 18, 0, 0) // Adjust the chart position
+          .setPosition(i + 3, 18, 0, 0) // Adjust the chart position
           .setOption('title', ticker + ' - Last 3 Months Performance')
           .setOption('hAxis.title', 'Date')
           .setOption('vAxis.title', 'Price')
