@@ -13,7 +13,14 @@ function getStockPrices() {
   for (var i = 0; i < tickers.length; i++) {
     var ticker = tickers[i][0];
     if (ticker) {
-      var fullTicker = 'NSE:' + ticker;
+      var fullTicker;
+      if (ticker.startsWith("NSE:") || ticker.startsWith("BSE:")) {
+        fullTicker = ticker;
+      } else {
+        // Default to NSE if no prefix is provided
+        fullTicker = 'NSE:' + ticker;
+      }
+
       var priceFormula = '=GOOGLEFINANCE("' + fullTicker + '","price")';
       var changePctFormula = '=GOOGLEFINANCE("' + fullTicker + '","changepct")';
       var volumeFormula = '=GOOGLEFINANCE("' + fullTicker + '","volume")';
@@ -95,7 +102,7 @@ function getStockPrices() {
 
 function clearStockParameters() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  sheet.getRange('D2:T').clearContent();
+  sheet.getRange('E3:V').clearContent();
 }
 
 function onOpen() {
