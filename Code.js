@@ -47,6 +47,10 @@ function getStockPrices() {
       sheet.getRange(i + 3, 18).setFormula(sharesFormula); // Column R for Shares
       sheet.getRange(i + 3, 19).setFormula(tradeTimeFormula); // Column S for Trade Time
       sheet.getRange(i + 3, 20).setFormula(dataDelayFormula); // Column T for Data Delay
+      
+      // Calculate Total Amount Invested (D column) = B (Quantity) * C (Purchase Price)
+      var totalInvestedFormula = '=B' + (i + 3) + '*C' + (i + 3);
+      sheet.getRange(i + 3, 4).setFormula(totalInvestedFormula); // Column D for Total Amount Invested
     }
   }
   
@@ -91,7 +95,7 @@ function getStockPrices() {
 
 function clearStockParameters() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  sheet.getRange('E2:T').clearContent();
+  sheet.getRange('D2:T').clearContent();
 }
 
 function onOpen() {
