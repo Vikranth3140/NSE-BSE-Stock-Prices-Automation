@@ -27,6 +27,7 @@ Read our Dev Blog [here](https://dev.to/vikranth3140/automate-nse-stock-prices-i
   - Trade Time
   - Data Delay
 - Automatically appends the appropriate exchange prefix to stock symbols.
+- Calculate the total amount invested in a particular company by specifying the number of stocks held and purchase price.
 
 ## Video Tutorial
 
@@ -43,8 +44,9 @@ For a detailed video tutorial on how to use the script, [click here](https://dri
 4. Save the script by clicking the disk icon or pressing `Ctrl + S`.
 5. Close the Apps Script editor and refresh your Google Sheets document.
 6. Enter the exchange (`NSE:` or `BSE:`) in column A and stock symbols starting from cell B3.
-7. Click on `Stock Prices` > `Update Prices` to fetch and display stock data.
-8. Click on `Stock Prices` > `Clear Stock Details` to clear all the stock details.
+7. Enter the number of stocks held in column C and the purchase price in column D to calculate the total amount invested in column E.
+8. Click on `Stock Prices` > `Update Prices` to fetch and display stock data.
+9. Click on `Stock Prices` > `Clear Stock Details` to clear all the stock details.
 
 ## View and Copy
 
