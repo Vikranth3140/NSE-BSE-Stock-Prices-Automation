@@ -68,6 +68,38 @@ Instead of manually entering stock symbols, you can use the `Populate.js` script
 6. In Google Sheets, go to `Extensions` > `Apps Script` > `populateStocks` and run the function.
 7. The predefined list of NSE stocks will be automatically populated starting from cell A3.
 
+## Setting Up Automatic Updates
+
+To set up the script to automatically update stock prices every minute:
+
+1. Open your Google Sheets document.
+2. Go to `Extensions` > `Apps Script`.
+3. Ensure you have the following functions in your script:
+
+    ```javascript
+    // Set a time-driven trigger to update stock prices every minute
+    function createTimeDrivenTrigger() {
+      ScriptApp.newTrigger('getStockPrices')
+        .timeBased()
+        .everyMinutes(1)
+        .create();
+    }
+
+    // Delete all existing time-driven triggers
+    function deleteTriggers() {
+      var triggers = ScriptApp.getProjectTriggers();
+      for (var i = 0; i < triggers.length; i++) {
+        ScriptApp.deleteTrigger(triggers[i]);
+      }
+    }
+    ```
+
+4. Save the script by clicking the disk icon or pressing `Ctrl + S`.
+5. Close the Apps Script editor and refresh your Google Sheets document.
+6. Go back to the Apps Script editor and run the `deleteTriggers` function to clear any existing triggers.
+7. Run the `createTimeDrivenTrigger` function to set up a time-driven trigger to update stock prices every minute.
+8. Verify the trigger by clicking on the clock icon (Triggers) in the left sidebar of the Apps Script editor. Ensure there is a trigger listed for `getStockPrices` to run every minute.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
