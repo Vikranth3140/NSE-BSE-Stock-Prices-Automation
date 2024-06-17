@@ -108,3 +108,19 @@ function onOpen() {
       .addItem('Clear Stock Details', 'clearStockParameters')
       .addToUi();
 }
+
+// Set a time-driven trigger to update stock prices every minute
+function createTimeDrivenTrigger() {
+  ScriptApp.newTrigger('getStockPrices')
+    .timeBased()
+    .everyMinutes(1)
+    .create();
+}
+
+// Delete all existing time-driven triggers
+function deleteTriggers() {
+  var triggers = ScriptApp.getProjectTriggers();
+  for (var i = 0; triggers.length; i++) {
+    ScriptApp.deleteTrigger(triggers[i]);
+  }
+}
