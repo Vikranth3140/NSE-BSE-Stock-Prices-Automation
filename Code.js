@@ -101,15 +101,6 @@ function clearStockParameters() {
   sheet.getRange('E3:V').clearContent();
 }
 
-function onOpen() {
-  var ui = SpreadsheetApp.getUi();
-  ui.createMenu('Stock Prices')
-      .addItem('Update Prices', 'getStockPrices')
-      .addItem('Clear Stock Details', 'clearStockParameters')
-      .addToUi();
-}
-
-// Set a time-driven trigger to update stock prices every minute
 function createTimeDrivenTrigger() {
   ScriptApp.newTrigger('getStockPrices')
     .timeBased()
@@ -117,10 +108,19 @@ function createTimeDrivenTrigger() {
     .create();
 }
 
-// Delete all existing time-driven triggers
 function deleteTriggers() {
   var triggers = ScriptApp.getProjectTriggers();
-  for (var i = 0; triggers.length; i++) {
+  for (var i = 0; i < triggers.length; i++) {
     ScriptApp.deleteTrigger(triggers[i]);
   }
+}
+
+function onOpen() {
+  var ui = SpreadsheetApp.getUi();
+  ui.createMenu('Stock Prices')
+      .addItem('Update Prices', 'getStockPrices')
+      .addItem('Clear Stock Details', 'clearStockParameters')
+      .addItem('Start Auto-Update', 'createTimeDrivenTrigger')
+      .addItem('Stop Auto-Update', 'deleteTriggers')
+      .addToUi();
 }
