@@ -101,26 +101,10 @@ function clearStockParameters() {
   sheet.getRange('E3:V').clearContent();
 }
 
-function createTimeDrivenTrigger() {
-  ScriptApp.newTrigger('getStockPrices')
-    .timeBased()
-    .everyMinutes(1)
-    .create();
-}
-
-function deleteTriggers() {
-  var triggers = ScriptApp.getProjectTriggers();
-  for (var i = 0; i < triggers.length; i++) {
-    ScriptApp.deleteTrigger(triggers[i]);
-  }
-}
-
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
   ui.createMenu('Stock Prices')
       .addItem('Update Prices', 'getStockPrices')
       .addItem('Clear Stock Details', 'clearStockParameters')
-      .addItem('Start Auto-Update', 'createTimeDrivenTrigger')
-      .addItem('Stop Auto-Update', 'deleteTriggers')
       .addToUi();
 }
